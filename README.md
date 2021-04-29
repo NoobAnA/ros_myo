@@ -51,3 +51,20 @@ EMG values:
 
 # License
 ros_myo is released with the MIT License. For full terms and conditions, see the [LICENSE](LICENSE) file
+
+
+
+# Debuge
+
+运行[myo-raw](https://github.com/dzhu/myo-raw)脚本*myo_raw.py*报错：
+
+> serial.serialutil.SerialException: could not open port /dev/ttyACM0: [Errno 13] Permission denied: '/dev/ttyACM0'
+
+串口权限问题（可能是编译peakcan驱动时编译内核造成），参考[Changing permissions on serial port](https://askubuntu.com/questions/58119/changing-permissions-on-serial-port)
+
+在路径*/etc/udev/rules.d/*新建udev规则*70-ttyACM.rules*，输入
+
+```
+KERNEL=="ttyACM[0-9]*",MODE="0666"
+```
+
